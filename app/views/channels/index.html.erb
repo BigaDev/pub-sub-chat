@@ -1,0 +1,41 @@
+<div class="chat">  
+	<input name="msg" type="text" value="" id="msg_content">
+	<button class="post">Post</button>
+</div>
+<div id="msgs">
+</div>
+<script type="text/javascript">
+var client = null;
+<% if Rails.env == "development" %>
+	client = new Faye.Client("http://localhost:5000/faye", {timeout: 500, retry: 5});
+<% else %>
+	client = new Faye.Client("/faye", {timeout: 500, retry: 5});
+<% end %>
+
+client.disable('autodisconnect');
+
+function subscribe() {
+	subscription = client.subscribe("/channels", function(data, channel) {
+		console.log(data);
+		$("#msgs").append(data + "<br>");
+	});
+}
+
+subscribe();
+
+function postMsg() {
+	var body = $("#msg_content").val() 
+	var publication = client.publish("/channels", body)
+	publication.then(function() {
+		$("#msg_content").val("").focus();
+	  	console.log('Message received by server!');
+	}, function(error) {
+		console.log('There was a problem: ' + error.message);
+	});
+}
+
+$(document).ready(function(){
+	$(".post").on("click", function(){ postMsg() });
+});
+
+</script>

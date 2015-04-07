@@ -1,0 +1,20 @@
+{
+  "name": "pub-sub-node",
+  "version": "1.0.0",
+  "description": "pub sub chat nodejs/rails",
+  "main": "pubsub.js",
+  "scripts": {
+    "start" : "node pubsub.js"
+  },
+  "keywords": [
+    "chat",
+    "realtime",
+    "pubsub"
+  ],
+  "dependencies": {
+    "faye": ">= 1.0.3",
+    "http": ">= 0.0.0"
+  },
+  "author": "Biga Gaber",
+  "license": "ISC"
+}
