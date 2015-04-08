@@ -5,10 +5,18 @@ Faye is a publish-subscribe messaging system based on the Bayeux protocol. It pr
 <a href="http://faye.jcoglan.com/"></a>
 
 git clone https://github.com/BigaDev/pub-sub-chat.git
+
 cd pub-sub-chat
+
 bundle install
+
 rails s
+
 then open other terminal
+
 cd pub-sub-node
+
 npm install
+
 npm start
+
